@@ -1,9 +1,12 @@
+
 function DectoN(num,N) 
     local str = ""
+    local isnum = false 
     while num > 0 do
         local remainder = math.fmod(num, N)
         if remainder < 10 then
             str = remainder .. str
+            isnum = true 
         else
             str = string.char(65 + remainder - 10) .. str
         end
@@ -11,8 +14,9 @@ function DectoN(num,N)
     end
     if #str == 0 then
         str = "0"
+        isnum = true 
     end
-    return str
+    return isnum and tonumber(str) or str
 end
 
 function NtoDec(num,N)
@@ -33,3 +37,8 @@ end
 function toDuodecimal(num)
    return DectoN(num,12)
 end 
+
+
+print(NtoDec(10,20))
+print(toDuodecimal(10))
+print(DectoN(15,16))
